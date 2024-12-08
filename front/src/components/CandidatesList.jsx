@@ -18,15 +18,13 @@ const CandidatesList = () => {
   }, []);
 
   return (
-    <div>
+    <div className="mt-7">
       <h2>Список кандидатов</h2>
       <>
         {candidates.map((candidate, index) => (
-          <div key={index}>
-            <p>
-              <strong>{candidate.name}</strong>
-              <strong>ID: {candidate.id}</strong>
-            </p>
+          <div className="flex flex-col text-lg mt-3" key={index}>
+            <strong>{candidate.name}</strong>
+            <strong>ID: {candidate.id}</strong>
             <p>Голоса: {candidate.voteCount}</p>
           </div>
         ))}
