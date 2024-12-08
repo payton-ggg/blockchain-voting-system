@@ -24,7 +24,8 @@ const CandidatesList = () => {
         {candidates.map((candidate, index) => (
           <div key={index}>
             <p>
-              <strong>{candidate.name}</strong>: {candidate.id}
+              <strong>{candidate.name}</strong>
+              <strong>ID: {candidate.id}</strong>
             </p>
             <p>Голоса: {candidate.voteCount}</p>
           </div>
