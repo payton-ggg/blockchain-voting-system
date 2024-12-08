@@ -20,16 +20,16 @@ const CandidatesList = () => {
   return (
     <div>
       <h2>Список кандидатов</h2>
-      <ul>
+      <>
         {candidates.map((candidate, index) => (
-          <li key={index}>
+          <div key={index}>
             <p>
               <strong>{candidate.name}</strong>: {candidate.id}
             </p>
             <p>Голоса: {candidate.voteCount}</p>
-          </li>
+          </div>
         ))}
-      </ul>
+      </>
     </div>
   );
 };
