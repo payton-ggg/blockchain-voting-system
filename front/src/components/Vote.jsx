@@ -16,7 +16,7 @@ const Vote = () => {
 
   return (
     <div>
-      <h2>Голосование</h2>
+      <h2 className="mt-7">Голосование</h2>
       <input
         type="number"
         placeholder="ID кандидата"
