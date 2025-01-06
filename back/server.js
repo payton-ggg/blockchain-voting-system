@@ -5,17 +5,14 @@ const cors = require("cors");
 const app = express();
 const PORT = 3000;
 
-// Middleware
 app.use(cors());
 app.use(express.json());
 
-// Подключение к блокчейну
 const web3 = new Web3("http://127.0.0.1:7545");
 const contractABI = require("./build/contracts/Voting.json").abi;
 const contractAddress = "0x602183069FEe8ff4B74a49d5aB8d613e87C769c5"; // Укажите адрес вашего развернутого контракта
 const votingContract = new web3.eth.Contract(contractABI, contractAddress);
 
-// Проверка наличия адресов в Ganache
 let accounts = [];
 (async () => {
   accounts = await web3.eth.getAccounts();
@@ -25,7 +22,6 @@ let accounts = [];
   }
 })();
 
-// 1. Получение списка кандидатов
 app.get("/candidates", async (req, res) => {
   try {
     const candidates = await votingContract.methods.getCandidates().call();
@@ -33,7 +29,7 @@ app.get("/candidates", async (req, res) => {
       id: index,
       name: candidate.name,
       description: candidate.description,
-      voteCount: parseInt(candidate.voteCount, 10), // Число возвращается корректно
+      voteCount: parseInt(candidate.voteCount, 10),
     }));
     res.json(formattedCandidates);
   } catch (err) {
@@ -42,7 +38,6 @@ app.get("/candidates", async (req, res) => {
   }
 });
 
-// 2. Добавление кандидата
 app.post("/candidates", async (req, res) => {
   const { name, description } = req.body;
   if (!name || !description) {
@@ -60,7 +55,6 @@ app.post("/candidates", async (req, res) => {
   }
 });
 
-// 3. Голосование за кандидата
 app.post("/vote", async (req, res) => {
   const { candidateId } = req.body;
   if (candidateId === undefined || candidateId === null) {
@@ -82,7 +76,6 @@ app.post("/vote", async (req, res) => {
   }
 });
 
-// Запуск сервера
 app.listen(PORT, () => {
   console.log(`Сервер запущен на http://localhost:${PORT}`);
 });
