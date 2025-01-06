@@ -23,7 +23,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -74,7 +75,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     }
   ],
   "metadata": "{\"compiler\":{\"version\":\"0.8.0+commit.c7dfd78e\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"}],\"name\":\"addCandidate\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"candidates\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"voteCount\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getCandidates\",\"outputs\":[{\"components\":[{\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"voteCount\",\"type\":\"uint256\"}],\"internalType\":\"struct Voting.Candidate[]\",\"name\":\"\",\"type\":\"tuple[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"candidateId\",\"type\":\"uint256\"}],\"name\":\"vote\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/Voting.sol\":\"Voting\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/Voting.sol\":{\"keccak256\":\"0x5b584b640d7152a7de1c1edba193700a56a22c70859ad5b9ef05bd41ca4eca8a\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://53105c6c0ff7de20c6d73cbf75d0adaf4aee97251a0dab48f18b177ef759afcb\",\"dweb:/ipfs/QmbSPgHpZuKwyLz3Lvb68JuJo48P8icFLvLkoXinvXmKM5\"]}},\"version\":1}",
@@ -5937,12 +5939,13 @@
     "5777": {
       "events": {},
       "links": {},
-      "address": "0x1Be30cd05c19C19C7207a0c8B043E68bd22e7034",
-      "transactionHash": "0x92cb5e3dff8508eac9bfb3e7196e58a3bb9eea74d6d12f403e5884848948fffe"
+      "address": "0x602183069FEe8ff4B74a49d5aB8d613e87C769c5",
+      "transactionHash": "0x1ecab28fa3224b5e81b4e0991a0485bb54868654e90ec336dee79f50ddd5d449"
     }
   },
   "schemaVersion": "3.4.16",
-  "updatedAt": "2025-01-06T21:07:13.222Z",
+  "updatedAt": "2025-01-06T21:07:41.949Z",
+  "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",
     "methods": {},
