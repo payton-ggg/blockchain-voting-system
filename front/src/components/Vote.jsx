@@ -7,16 +7,16 @@ const Vote = () => {
   const handleVote = async () => {
     try {
       await vote(candidateId);
-      alert("Голос принят!");
+      alert("Голос прийнято!");
       setCandidateId("");
     } catch (error) {
-      console.error("Ошибка при голосовании:", error);
+      console.error("Помилка під час голосування:", error);
     }
   };
 
   return (
     <>
-      <h2 className="mt-7">Голосование</h2>
+      <h2 className="mt-7">Голосування</h2>
       <div className="flex gap-10 mt-3">
         <input
           type="number"

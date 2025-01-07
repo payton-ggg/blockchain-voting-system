@@ -10,7 +10,7 @@ const CandidatesList = () => {
         const data = await getCandidates();
         setCandidates(data);
       } catch (error) {
-        console.error("Ошибка при загрузке кандидатов:", error);
+        console.error("Помилка під час завантаження кандидатів:", error);
       }
     };
 
@@ -19,7 +19,7 @@ const CandidatesList = () => {
 
   return (
     <div className="mt-7">
-      <h2>Список кандидатов</h2>
+      <h2>Список кандидатів</h2>
       <>
         {candidates.map((candidate, index) => (
           <div className="flex flex-col text-lg mt-3" key={index}>

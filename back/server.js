@@ -10,7 +10,7 @@ app.use(express.json());
 
 const web3 = new Web3("http://127.0.0.1:7545");
 const contractABI = require("./build/contracts/Voting.json").abi;
-const contractAddress = "0x602183069FEe8ff4B74a49d5aB8d613e87C769c5"; // Укажите адрес вашего развернутого контракта
+const contractAddress = "0xD4597e66Bdc98D93Cd977DDf19AC9411970BC352"; // Укажите адрес вашего развернутого контракта
 const votingContract = new web3.eth.Contract(contractABI, contractAddress);
 
 let accounts = [];

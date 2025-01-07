@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="App">
       <header>
-        <h1>Система голосования</h1>
+        <h1>Система виборів</h1>
       </header>
       <main>
         <AddCandidate />
