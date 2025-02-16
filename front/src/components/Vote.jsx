@@ -1,18 +1,60 @@
 import { useState } from "react";
-import { vote } from "../services/api";
+import { checkCode, vote } from "../services/api";
 
 const Vote = () => {
-  const [candidateId, setCandidateId] = useState("");
-  const [identification, setIdentification] = useState("");
+  const [selectedCandidate, setSelectedCandidate] = useState(null);
+  const [uniqueCode, setUniqueCode] = useState("");
+  const [isCodeValid, setIsCodeValid] = useState(null);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+
+  const handleCheckCode = async () => {
+    setErrorMessage("");
+    setSuccessMessage("");
+    setIsCodeValid(null);
+
+    if (!uniqueCode) {
+      setErrorMessage("Введите код для проверки.");
+      return;
+    }
+
+    try {
+      const result = await checkCode(uniqueCode);
+      if (result.isUsed) {
+        setIsCodeValid(false);
+        setErrorMessage("Этот код уже был использован.");
+      } else {
+        setIsCodeValid(true);
+        setSuccessMessage("Код действителен. Вы можете проголосовать.");
+      }
+    } catch (error) {
+      setErrorMessage("Ошибка при проверке кода.", error);
+    }
+  };
 
   const handleVote = async () => {
+    setErrorMessage("");
+    setSuccessMessage("");
+
+    if (!selectedCandidate) {
+      setErrorMessage("Выберите кандидата.");
+      return;
+    }
+
+    if (!uniqueCode || isCodeValid === false || isCodeValid === null) {
+      setErrorMessage("Пожалуйста, сначала проверьте код.");
+      return;
+    }
+
     try {
-      await vote(candidateId, identification);
-      alert("Голос прийнято!");
-      setCandidateId("");
-      setIdentification("");
+      await vote(selectedCandidate, uniqueCode);
+      setSuccessMessage("Ваш голос успешно засчитан!");
+      setIsCodeValid(null);
+      setUniqueCode("");
     } catch (error) {
-      console.error("Помилка під час голосування:", error);
+      setErrorMessage(
+        error.response?.data?.error || "Ошибка при отправке голоса"
+      );
     }
   };
 
