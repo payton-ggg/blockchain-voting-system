@@ -3,12 +3,14 @@ import { vote } from "../services/api";
 
 const Vote = () => {
   const [candidateId, setCandidateId] = useState("");
+  const [identification, setIdentification] = useState("");
 
   const handleVote = async () => {
     try {
-      await vote(candidateId);
+      await vote(candidateId, identification);
       alert("Голос прийнято!");
       setCandidateId("");
+      setIdentification("");
     } catch (error) {
       console.error("Помилка під час голосування:", error);
     }
@@ -17,6 +19,13 @@ const Vote = () => {
   return (
     <>
       <h2 className="mt-7">Голосування</h2>
+      <input
+        type="number"
+        placeholder="Indetefication"
+        value={identification}
+        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        onChange={(e) => setIdentification(e.target.value)}
+      />
       <div className="flex gap-10 mt-3">
         <input
           type="number"

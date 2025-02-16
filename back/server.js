@@ -23,51 +23,57 @@ let accounts = [];
   }
 })();
 
+// Отримати всіх кандидатів
 app.get("/candidates", async (req, res) => {
   try {
     const candidates = await votingContract.methods.getCandidates().call();
     const formattedCandidates = candidates.map((candidate, index) => ({
       id: index,
       name: candidate.name,
-      description: candidate.description,
       voteCount: parseInt(candidate.voteCount, 10),
     }));
     res.json(formattedCandidates);
   } catch (err) {
     console.error("Помилка під час отримання кандидатів:", err);
-    res.status(500).json({ error: "Ошибка сервера" });
+    res.status(500).json({ error: "Помилка сервера" });
   }
 });
 
+// Додати кандидата
 app.post("/candidates", async (req, res) => {
-  const { name, description } = req.body;
-  if (!name || !description) {
-    return res.status(400).json({ error: "Ім'я та опис обов'язкові" });
+  const { name } = req.body;
+  if (!name) {
+    return res.status(400).json({ error: "Ім'я обов'язкове" });
   }
 
   try {
-    await votingContract.methods
-      .addCandidate(name, description)
-      .send({ from: accounts[0] });
-    res.status(200).json({ message: "" });
+    await votingContract.methods.addCandidate(name).send({ from: accounts[0] });
+    res.status(200).json({ message: "Кандидат доданий" });
   } catch (err) {
     console.error("Помилка під час додавання кандидата:", err);
     res.status(500).json({ error: "Помилка сервера" });
   }
 });
 
+// Голосування
 app.post("/vote", async (req, res) => {
-  const { candidateId } = req.body;
-  if (candidateId === undefined || candidateId === null) {
-    return res.status(400).json({ error: "Необхідно вказати ID кандидата" });
+  const { candidateId, uniqueCode } = req.body;
+
+  if (candidateId === undefined || uniqueCode === undefined) {
+    return res
+      .status(400)
+      .json({ error: "Необхідно вказати ID кандидата та унікальний код" });
   }
 
   try {
-    await votingContract.methods.vote(candidateId).send({ from: accounts[0] });
+    await votingContract.methods
+      .vote(candidateId, uniqueCode)
+      .send({ from: accounts[0] });
+
     res.status(200).json({ message: "Голос успішно зараховано" });
   } catch (err) {
-    if (err.message.includes("already voted")) {
-      return res.status(400).json({ error: "Ви вже проголосували" });
+    if (err.message.includes("Code already used")) {
+      return res.status(400).json({ error: "Цей код вже використаний" });
     }
     if (err.message.includes("Invalid candidate ID")) {
       return res.status(400).json({ error: "Некоректний ID кандидата" });
@@ -77,6 +83,19 @@ app.post("/vote", async (req, res) => {
   }
 });
 
+// Перевірка чи використаний код
+app.get("/check-code/:code", async (req, res) => {
+  const { code } = req.params;
+
+  try {
+    const isUsed = await votingContract.methods.isCodeUsed(code).call();
+    res.json({ code, isUsed });
+  } catch (err) {
+    console.error("Помилка під час перевірки коду:", err);
+    res.status(500).json({ error: "Помилка сервера" });
+  }
+});
+
 app.listen(PORT, () => {
-  console.log(`Сервер розгорнуто на http://localhost:${PORT}`);
+  console.log(`Сервер працює на http://localhost:${PORT}`);
 });
