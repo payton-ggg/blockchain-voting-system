@@ -1,12 +1,13 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { checkCode, vote } from "../services/api";
+import { errorContext } from "../App";
 
 const Vote = () => {
   const [selectedCandidate, setSelectedCandidate] = useState(null);
   const [uniqueCode, setUniqueCode] = useState("");
   const [isCodeValid, setIsCodeValid] = useState(null);
-  const [errorMessage, setErrorMessage] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
+  const { errorMessage, setErrorMessage, successMessage, setSuccessMessage } =
+    useContext(errorContext);
 
   const handleCheckCode = async () => {
     setErrorMessage("");

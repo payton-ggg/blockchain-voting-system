@@ -1,19 +1,21 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { addCandidate } from "../services/api";
+import { errorContext } from "../App";
 
 const AddCandidate = () => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("ф");
+  const { setErrorMessage, setSuccessMessage } = useContext(errorContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await addCandidate(name, description);
-      alert("Кандидат успішно доданий!");
+      setSuccessMessage("Кандидат успішно доданий!");
       setName("");
       setDescription("");
     } catch (error) {
-      console.error("Помилка під час додавання кандидата:", error);
+      setErrorMessage("Помилка під час додавання кандидата:", error);
     }
   };
 
