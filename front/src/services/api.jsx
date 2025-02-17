@@ -19,3 +19,8 @@ export const checkCode = async (code) => {
   const response = await axios.get(`${BASE_URL}/check-code/${code}`);
   return response.data;
 };
+
+export const getValidCodes = async () => {
+  const response = await axios.get(`${BASE_URL}/valid-codes`);
+  return response.data;
+};

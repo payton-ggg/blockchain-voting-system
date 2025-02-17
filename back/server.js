@@ -96,6 +96,16 @@ app.get("/check-code/:code", async (req, res) => {
   }
 });
 
+app.get("/valid-codes", async (req, res) => {
+  try {
+    const codes = await votingContract.methods.getValidCodes().call();
+    res.json(codes);
+  } catch (err) {
+    console.error("Ошибка при получении валидных кодов:", err);
+    res.status(500).json({ error: "Ошибка сервера" });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Сервер працює на http://localhost:${PORT}`);
 });
