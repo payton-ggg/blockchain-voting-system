@@ -58,18 +58,30 @@ app.post("/candidates", async (req, res) => {
 // Голосування з кодом
 app.post("/vote", async (req, res) => {
   const { candidateId, code } = req.body;
+
   if (candidateId === undefined || !code) {
-    return res.status(400).json({ error: "ID кандидата та код обов'язкові" });
+    return res
+      .status(400)
+      .json({ error: "Необхідно вказати ID кандидата та код" });
   }
 
   try {
     await votingContract.methods
       .vote(candidateId, code)
       .send({ from: accounts[0] });
-    res.status(200).json({ message: "Голос зараховано" });
+    res.status(200).json({ message: "Голос успішно зараховано" });
   } catch (err) {
-    console.error("Помилка під час голосування:", err);
-    res.status(500).json({ error: err.message });
+    console.error("Помилка виконання контракту:", err);
+
+    if (err.data) {
+      const errorKeys = Object.keys(err.data);
+      if (errorKeys.length > 0) {
+        const revertReason = err.data[errorKeys[0]].reason;
+        return res.status(400).json({ error: `Помилка: ${revertReason}` });
+      }
+    }
+
+    res.status(500).json({ error: "Сталася невідома помилка" });
   }
 });
 
