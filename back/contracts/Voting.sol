@@ -25,8 +25,17 @@ contract Voting {
 
     function vote(uint256 candidateId, string memory code) public {
         require(candidateId < candidates.length, "Invalid candidate ID");
-        require(isValidCode(code), "Code is not valid");
-        require(!usedCodes[code], "Code has already been used");
+
+        bool codeExists = false;
+        for (uint256 i = 0; i < validCodes.length; i++) {
+            if (keccak256(abi.encodePacked(validCodes[i])) == keccak256(abi.encodePacked(code))) {
+                codeExists = true;
+                break;
+            }
+        }
+        require(codeExists, "Code does not exist");
+
+        require(!usedCodes[code], "Code already used");
 
         usedCodes[code] = true;
         candidates[candidateId].voteCount++;

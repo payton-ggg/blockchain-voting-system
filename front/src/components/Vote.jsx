@@ -33,7 +33,7 @@ const Vote = () => {
       <h2 className="mt-7">Голосування</h2>
       <div className="flex gap-10 mt-3">
         <input
-          type="number"
+          type="text"
           placeholder="Indetefication"
           value={uniqueCode}
           onChange={(e) => setUniqueCode(e.target.value)}
