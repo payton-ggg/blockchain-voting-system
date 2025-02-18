@@ -47,7 +47,9 @@ app.post("/candidates", async (req, res) => {
   }
 
   try {
-    await votingContract.methods.addCandidate(name).send({ from: accounts[0] });
+    await votingContract.methods
+      .addCandidate(name)
+      .send({ from: accounts[0], gas: 300000 });
     res.status(200).json({ message: "Кандидат доданий" });
   } catch (err) {
     console.error("Помилка під час додавання кандидата:", err);
@@ -81,7 +83,7 @@ app.post("/vote", async (req, res) => {
       }
     }
 
-    res.status(500).json({ error: "Сталася невідома помилка" });
+    res.status(500).json({ error: "Сталася помилка з вашим кодом" });
   }
 });
 
