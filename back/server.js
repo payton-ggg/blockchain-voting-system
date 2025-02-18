@@ -23,7 +23,7 @@ let accounts = [];
   }
 })();
 
-// Отримати всіх кандидатів
+// Отримати кандидатів
 app.get("/candidates", async (req, res) => {
   try {
     const candidates = await votingContract.methods.getCandidates().call();
@@ -55,54 +55,44 @@ app.post("/candidates", async (req, res) => {
   }
 });
 
-// Голосування
+// Голосування з кодом
 app.post("/vote", async (req, res) => {
-  const { candidateId, uniqueCode } = req.body;
-
-  if (candidateId === undefined || uniqueCode === undefined) {
-    return res
-      .status(400)
-      .json({ error: "Необхідно вказати ID кандидата та унікальний код" });
+  const { candidateId, code } = req.body;
+  if (candidateId === undefined || !code) {
+    return res.status(400).json({ error: "ID кандидата та код обов'язкові" });
   }
 
   try {
     await votingContract.methods
-      .vote(candidateId, uniqueCode)
+      .vote(candidateId, code)
       .send({ from: accounts[0] });
-
-    res.status(200).json({ message: "Голос успішно зараховано" });
+    res.status(200).json({ message: "Голос зараховано" });
   } catch (err) {
-    if (err.message.includes("Code already used")) {
-      return res.status(400).json({ error: "Цей код вже використаний" });
-    }
-    if (err.message.includes("Invalid candidate ID")) {
-      return res.status(400).json({ error: "Некоректний ID кандидата" });
-    }
     console.error("Помилка під час голосування:", err);
-    res.status(500).json({ error: "Помилка сервера" });
+    res.status(500).json({ error: err.message });
   }
 });
 
-// Перевірка чи використаний код
+// Перевірка використання коду
 app.get("/check-code/:code", async (req, res) => {
   const { code } = req.params;
-
   try {
     const isUsed = await votingContract.methods.isCodeUsed(code).call();
-    res.json({ code, isUsed });
+    res.json({ isUsed });
   } catch (err) {
     console.error("Помилка під час перевірки коду:", err);
     res.status(500).json({ error: "Помилка сервера" });
   }
 });
 
+// Отримати всі валідні коди (тільки для тесту)
 app.get("/valid-codes", async (req, res) => {
   try {
-    const codes = await votingContract.methods.getValidCodes().call();
-    res.json(codes);
+    const validCodes = await votingContract.methods.getValidCodes().call();
+    res.json(validCodes);
   } catch (err) {
-    console.error("Ошибка при получении валидных кодов:", err);
-    res.status(500).json({ error: "Ошибка сервера" });
+    console.error("Помилка отримання кодів:", err);
+    res.status(500).json({ error: "Помилка сервера" });
   }
 });
 

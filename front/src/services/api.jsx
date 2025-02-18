@@ -11,13 +11,13 @@ export const addCandidate = async (name) => {
   await axios.post(`${BASE_URL}/candidates`, { name });
 };
 
-export const vote = async (candidateId, uniqueCode) => {
-  await axios.post(`${BASE_URL}/vote`, { candidateId, uniqueCode });
+export const vote = async (candidateId, code) => {
+  await axios.post(`${BASE_URL}/vote`, { candidateId, code });
 };
 
 export const checkCode = async (code) => {
   const response = await axios.get(`${BASE_URL}/check-code/${code}`);
-  return response.data;
+  return response.data.isUsed;
 };
 
 export const getValidCodes = async () => {

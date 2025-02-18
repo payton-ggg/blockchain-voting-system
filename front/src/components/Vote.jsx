@@ -5,57 +5,26 @@ import { errorContext } from "../App";
 const Vote = () => {
   const [selectedCandidate, setSelectedCandidate] = useState(null);
   const [uniqueCode, setUniqueCode] = useState("");
-  const [isCodeValid, setIsCodeValid] = useState(null);
   const { errorMessage, setErrorMessage, successMessage, setSuccessMessage } =
     useContext(errorContext);
 
-  const handleCheckCode = async () => {
-    setErrorMessage("");
-    setSuccessMessage("");
-    setIsCodeValid(null);
-
-    if (!uniqueCode) {
-      setErrorMessage("Введите код для проверки.");
-      return;
-    }
-
-    try {
-      const result = await checkCode(uniqueCode);
-      if (result.isUsed) {
-        setIsCodeValid(false);
-        setErrorMessage("Этот код уже был использован.");
-      } else {
-        setIsCodeValid(true);
-        setSuccessMessage("Код действителен. Вы можете проголосовать.");
-      }
-    } catch (error) {
-      setErrorMessage("Ошибка при проверке кода.", error);
-    }
-  };
-
   const handleVote = async () => {
-    setErrorMessage("");
-    setSuccessMessage("");
-
-    if (!selectedCandidate) {
-      setErrorMessage("Выберите кандидата.");
+    if (!selectedCandidate || !uniqueCode) {
+      setErrorMessage("Виберіть кандидата і введіть код");
       return;
     }
 
-    if (!uniqueCode || isCodeValid === false || isCodeValid === null) {
-      setErrorMessage("Пожалуйста, сначала проверьте код.");
+    const isUsed = await checkCode(uniqueCode);
+    if (isUsed) {
+      setErrorMessage("Цей код вже використано!");
       return;
     }
 
     try {
       await vote(selectedCandidate, uniqueCode);
-      setSuccessMessage("Ваш голос успешно засчитан!");
-      setIsCodeValid(null);
-      setUniqueCode("");
+      setSuccessMessage("Голос успішно зараховано!");
     } catch (error) {
-      setErrorMessage(
-        error.response?.data?.error || "Ошибка при отправке голоса"
-      );
+      setErrorMessage(`Помилка: ${error.response?.data?.error}`);
     }
   };
 
@@ -70,12 +39,6 @@ const Vote = () => {
           onChange={(e) => setUniqueCode(e.target.value)}
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         />
-        <button
-          onClick={handleCheckCode}
-          className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        >
-          Перевірити валідність коду
-        </button>
       </div>
 
       <div className="flex gap-10 mt-3">
@@ -88,7 +51,6 @@ const Vote = () => {
         />
         <button
           onClick={handleVote}
-          disabled={!isCodeValid}
           className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         >
           Голосувати
