@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { getCandidates } from "../services/api";
-
 const CandidatesList = () => {
   const [candidates, setCandidates] = useState([]);
 

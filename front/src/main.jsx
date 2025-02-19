@@ -6,7 +6,6 @@ import AddCandidate from "./components/AddCandidate";
 import CandidatesList from "./components/CandidatesList";
 import Vote from "./components/Vote";
 import { BrowserRouter, Routes, Route } from "react-router";
-
 const root = document.getElementById("root");
 
 ReactDOM.createRoot(root).render(
