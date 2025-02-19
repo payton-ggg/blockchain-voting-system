@@ -41,14 +41,14 @@ app.get("/candidates", async (req, res) => {
 
 // Додати кандидата
 app.post("/candidates", async (req, res) => {
-  const { name } = req.body;
+  const { name, description } = req.body;
   if (!name) {
-    return res.status(400).json({ error: "Ім'я обов'язкове" });
+    return res.status(400).json({ error: "Ім'я та опис обов'язкові" });
   }
 
   try {
     await votingContract.methods
-      .addCandidate(name)
+      .addCandidate(name, description)
       .send({ from: accounts[0], gas: 300000 });
     res.status(200).json({ message: "Кандидат доданий" });
   } catch (err) {

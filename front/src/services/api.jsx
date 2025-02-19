@@ -7,8 +7,8 @@ export const getCandidates = async () => {
   return response.data;
 };
 
-export const addCandidate = async (name) => {
-  await axios.post(`${BASE_URL}/candidates`, { name });
+export const addCandidate = async (name, description) => {
+  await axios.post(`${BASE_URL}/candidates`, { name, description });
 };
 
 export const vote = async (candidateId, code) => {

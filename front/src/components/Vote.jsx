@@ -1,12 +1,11 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { checkCode, vote } from "../services/api";
-import { errorContext } from "../App";
 
 const Vote = () => {
   const [selectedCandidate, setSelectedCandidate] = useState(null);
   const [uniqueCode, setUniqueCode] = useState("");
-  const { errorMessage, setErrorMessage, successMessage, setSuccessMessage } =
-    useContext(errorContext);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
   const handleVote = async () => {
     if (!selectedCandidate || !uniqueCode) {
@@ -35,7 +34,7 @@ const Vote = () => {
       <div className="flex gap-10 mt-3">
         <input
           type="text"
-          placeholder="Idetefication"
+          placeholder="Ідентифікаційний код"
           value={uniqueCode}
           onChange={(e) => setUniqueCode(e.target.value)}
           className="bg-[#7C7F65] border border-green-700 placeholder-gray-800 text-black text-sm rounded-lg block w-full p-2.5"
@@ -50,6 +49,7 @@ const Vote = () => {
           className="bg-[#7C7F65] border border-green-700 placeholder-gray-800 text-black text-sm rounded-lg block w-full p-2.5"
           onChange={(e) => setSelectedCandidate(e.target.value)}
         />
+
         <button
           onClick={handleVote}
           className="hover:bg-[#BEA8AA] focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"

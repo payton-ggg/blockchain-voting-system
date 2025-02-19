@@ -4,7 +4,7 @@ import { errorContext } from "../App";
 
 const AddCandidate = () => {
   const [name, setName] = useState("");
-  const [description, setDescription] = useState("ф");
+  const [description, setDescription] = useState("");
   const { setErrorMessage, setSuccessMessage } = useContext(errorContext);
 
   const handleSubmit = async (e) => {
@@ -29,6 +29,14 @@ const AddCandidate = () => {
         onChange={(e) => setName(e.target.value)}
         className="bg-[#7C7F65] border border-green-700 placeholder-gray-800 text-black text-sm rounded-lg block w-full p-2.5 mt-5"
         required
+      />
+
+      <textarea
+        type="text"
+        placeholder="Опис кандидата"
+        value={description}
+        className="bg-[#7C7F65] border border-green-700 placeholder-gray-800 text-black text-sm rounded-lg block w-full p-2.5 mt-3"
+        onChange={(e) => setDescription(e.target.value)}
       />
 
       <button
