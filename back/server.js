@@ -87,18 +87,6 @@ app.post("/vote", async (req, res) => {
   }
 });
 
-// Перевірка використання коду
-app.get("/check-code/:code", async (req, res) => {
-  const { code } = req.params;
-  try {
-    const isUsed = await votingContract.methods.isCodeUsed(code).call();
-    res.json({ isUsed });
-  } catch (err) {
-    console.error("Помилка під час перевірки коду:", err);
-    res.status(500).json({ error: "Помилка сервера" });
-  }
-});
-
 // Отримати всі валідні коди (тільки для тесту)
 app.get("/valid-codes", async (req, res) => {
   try {

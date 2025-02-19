@@ -4,6 +4,7 @@ pragma solidity ^0.8.0;
 contract Voting {
     struct Candidate {
         string name;
+        string description;
         uint256 voteCount;
     }
 
@@ -19,8 +20,8 @@ contract Voting {
         validCodes = _validCodes;
     }
 
-    function addCandidate(string memory name) public {
-        candidates.push(Candidate(name, 0));
+    function addCandidate(string memory name, string memory description) public {
+        candidates.push(Candidate(name, description, 0));
     }
 
     function vote(uint256 candidateId, string memory code) public {
@@ -47,15 +48,6 @@ contract Voting {
 
     function isCodeUsed(string memory code) public view returns (bool) {
         return usedCodes[code];
-    }
-
-    function isValidCode(string memory code) public view returns (bool) {
-        for (uint256 i = 0; i < validCodes.length; i++) {
-            if (keccak256(abi.encodePacked(validCodes[i])) == keccak256(abi.encodePacked(code))) {
-                return true;
-            }
-        }
-        return false;
     }
 
     function getValidCodes() public view returns (string[] memory) {
