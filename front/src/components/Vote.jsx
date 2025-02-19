@@ -2,7 +2,7 @@ import { useState } from "react";
 import { checkCode, vote } from "../services/api";
 
 const Vote = () => {
-  const [selectedCandidate, setSelectedCandidate] = useState(null);
+  const [selectedCandidate, setSelectedCandidate] = useState();
   const [uniqueCode, setUniqueCode] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
