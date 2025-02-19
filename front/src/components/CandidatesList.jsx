@@ -24,6 +24,7 @@ const CandidatesList = () => {
         {candidates.map((candidate, index) => (
           <div className="flex flex-col text-lg mt-3" key={index}>
             <strong>{candidate.name}</strong>
+            <p>{candidate.description}</p>
             <strong>ID: {candidate.id}</strong>
             <p>Голоса: {candidate.voteCount}</p>
           </div>

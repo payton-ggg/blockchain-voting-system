@@ -46,6 +46,10 @@ app.post("/candidates", async (req, res) => {
     return res.status(400).json({ error: "Ім'я та опис обов'язкові" });
   }
 
+  if (!description) {
+    return res.status(400).json({ error: "Ім'я та опис обов'язкові" });
+  }
+
   try {
     await votingContract.methods
       .addCandidate(name, description)
