@@ -1,7 +1,5 @@
+import { NavLink } from "react-router";
 import "./App.css";
-import AddCandidate from "./components/AddCandidate";
-import CandidatesList from "./components/CandidatesList";
-import Vote from "./components/Vote";
 import { createContext, useState } from "react";
 
 // eslint-disable-next-line react-refresh/only-export-components
@@ -63,6 +61,16 @@ function App() {
             </li>
             <li></li>
           </ul>
+        </div>
+        <div className="text-xl mt-5">
+          <NavLink to="/voting">Проголосувати</NavLink>
+          <br />
+          <NavLink to="/list-of-candidates">
+            Попередні результати голосування
+          </NavLink>
+          <br />
+          <NavLink to="/add-candidates">Додати кандидата</NavLink>
+          <br />
         </div>
       </errorContext.Provider>
     </div>
