@@ -30,6 +30,7 @@ app.get("/candidates", async (req, res) => {
     const formattedCandidates = candidates.map((candidate, index) => ({
       id: index,
       name: candidate.name,
+      description: candidate.description,
       voteCount: parseInt(candidate.voteCount, 10),
     }));
     res.json(formattedCandidates);
