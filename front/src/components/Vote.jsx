@@ -3,7 +3,6 @@ import { checkCode, getCandidates, vote } from "../services/api";
 import { NavLink } from "react-router";
 
 const Vote = () => {
-  const [selectedCandidate, setSelectedCandidate] = useState();
   const [uniqueCode, setUniqueCode] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
@@ -22,8 +21,8 @@ const Vote = () => {
     fetchCandidates();
   }, []);
 
-  const handleVote = async () => {
-    if (!selectedCandidate || !uniqueCode) {
+  const handleVote = async (id) => {
+    if (!uniqueCode) {
       setErrorMessage("Виберіть кандидата і введіть код");
       return;
     }
@@ -35,7 +34,7 @@ const Vote = () => {
     }
 
     try {
-      await vote(selectedCandidate, uniqueCode);
+      await vote(id, uniqueCode);
       setErrorMessage("");
       setSuccessMessage("Голос успішно зараховано!");
     } catch (error) {
@@ -66,8 +65,8 @@ const Vote = () => {
           Підтвердити вибір
         </th>
       </tr>
-      {candidates.map((candidate, index) => (
-        <tr className="text-base mt-3" key={index}>
+      {candidates.map((candidate) => (
+        <tr className="text-base mt-3" key={candidate.id}>
           <th className="border-collapse border border-[#bea8aa] p-1">
             {candidate.name}
           </th>
@@ -75,7 +74,7 @@ const Vote = () => {
             <NavLink to="/list-of-candidates">Докладніше</NavLink>
           </th>
           <th className="border-collapse border border-[#bea8aa] p-1">
-            <button onClick={handleVote}>Обрати</button>
+            <button onClick={() => handleVote(candidate.id)}>Обрати</button>
           </th>
         </tr>
       ))}
