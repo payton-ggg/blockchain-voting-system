@@ -66,7 +66,7 @@ function App() {
           <NavLink to="/voting">Проголосувати</NavLink>
           <br />
           <NavLink to="/list-of-candidates">
-            Попередні результати голосування
+            Попередні результати та ID кандидатів
           </NavLink>
           <br />
           <NavLink to="/add-candidates">Додати кандидата</NavLink>
