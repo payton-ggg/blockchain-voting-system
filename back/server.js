@@ -103,6 +103,17 @@ app.get("/valid-codes", async (req, res) => {
   }
 });
 
+app.get("/check-code/:code", async (req, res) => {
+  const { code } = req.params;
+  try {
+    const isUsed = await votingContract.methods.isCodeUsed(code).call();
+    res.json({ isUsed });
+  } catch (err) {
+    console.error("Помилка під час перевірки коду:", err);
+    res.status(500).json({ error: "Помилка сервера" });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Сервер працює на http://localhost:${PORT}`);
 });
