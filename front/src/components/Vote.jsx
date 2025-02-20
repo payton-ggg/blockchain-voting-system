@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { checkCode, getCandidates, vote } from "../services/api";
+import { NavLink } from "react-router";
 
 const Vote = () => {
   const [selectedCandidate, setSelectedCandidate] = useState();
@@ -51,26 +52,40 @@ const Vote = () => {
           placeholder="Ідентифікаційний код"
           value={uniqueCode}
           onChange={(e) => setUniqueCode(e.target.value)}
-          className="bg-[#7C7F65] border border-green-700 placeholder-gray-800 text-black text-sm rounded-lg block w-full p-2.5"
+          className="bg-[#7C7F65] border border-green-700 placeholder-gray-800 text-black text-sm rounded-lg block w-full p-2.5 mb-3"
         />
       </div>
+      <tr>
+        <th className="border-collapse border border-[#bea8aa] p-1">
+          Ім&apos;я
+        </th>
+        <th className="border-collapse border border-[#bea8aa] p-1">
+          Інформація про кандидата
+        </th>
+        <th className="border-collapse border border-[#bea8aa] p-1">
+          Підтвердити вибір
+        </th>
+      </tr>
+      {candidates.map((candidate, index) => (
+        <tr className="text-base mt-3" key={index}>
+          <th className="border-collapse border border-[#bea8aa] p-1">
+            {candidate.name}
+          </th>
+          <th className="border-collapse border border-[#bea8aa] p-1">
+            <NavLink to="/list-of-candidates">Докладніше</NavLink>
+          </th>
+          <th className="border-collapse border border-[#bea8aa] p-1">
+            <button onClick={handleVote}>Обрати</button>
+          </th>
+        </tr>
+      ))}
 
-      <div className="flex gap-10 mt-3">
-        <input
-          type="number"
-          placeholder="ID кандидата"
-          value={selectedCandidate}
-          className="bg-[#7C7F65] border border-green-700 placeholder-gray-800 text-black text-sm rounded-lg block w-full p-2.5"
-          onChange={(e) => setSelectedCandidate(e.target.value)}
-        />
-
-        <button
-          onClick={handleVote}
-          className="hover:bg-[#BEA8AA] focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
-        >
-          Голосувати
-        </button>
-      </div>
+      <button
+        onClick={handleVote}
+        className="hover:bg-[#BEA8AA] focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center mt-3"
+      >
+        Голосувати
+      </button>
       {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
       {successMessage && <p style={{ color: "green" }}>{successMessage}</p>}
     </>
