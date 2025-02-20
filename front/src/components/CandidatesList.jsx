@@ -18,17 +18,39 @@ const CandidatesList = () => {
 
   return (
     <div className="mt-7">
-      <h2>Список кандидатів</h2>
-      <>
+      <h2 className="pacifico-regular text-4xl">Список кандидатів</h2>
+      <table className="border-collapse border border-[#bea8aa] mt-8">
+        <thead className="border-collapse border border-[#bea8aa] bg-[#bbb59f]">
+          <th className="border-collapse border border-[#bea8aa] p-1">
+            Ім`я кандидата
+          </th>
+          <th className="border-collapse border border-[#bea8aa] p-1">
+            Опис кандидата
+          </th>
+          <th className="border-collapse border border-[#bea8aa] p-1">
+            ID кандидата
+          </th>
+          <th className="border-collapse border border-[#bea8aa] p-1">
+            Кількість голосів
+          </th>
+        </thead>
         {candidates.map((candidate, index) => (
-          <div className="flex flex-col text-lg mt-3" key={index}>
-            <strong>{candidate.name}</strong>
-            <p>{candidate.description}</p>
-            <strong>ID: {candidate.id}</strong>
-            <p>Голоса: {candidate.voteCount}</p>
-          </div>
+          <tr className="text-base mt-3" key={index}>
+            <th className="border-collapse border border-[#bea8aa] p-1">
+              {candidate.name}
+            </th>
+            <th className="border-collapse border border-[#bea8aa] p-1">
+              {candidate.description}
+            </th>
+            <th className="border-collapse border border-[#bea8aa] p-1">
+              {candidate.id}
+            </th>
+            <th className="border-collapse border border-[#bea8aa] p-1">
+              {candidate.voteCount}
+            </th>
+          </tr>
         ))}
-      </>
+      </table>
     </div>
   );
 };

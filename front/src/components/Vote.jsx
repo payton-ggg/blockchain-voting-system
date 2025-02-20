@@ -1,11 +1,25 @@
-import { useState } from "react";
-import { checkCode, vote } from "../services/api";
+import { useEffect, useState } from "react";
+import { checkCode, getCandidates, vote } from "../services/api";
 
 const Vote = () => {
   const [selectedCandidate, setSelectedCandidate] = useState();
   const [uniqueCode, setUniqueCode] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const [candidates, setCandidates] = useState([]);
+
+  useEffect(() => {
+    const fetchCandidates = async () => {
+      try {
+        const data = await getCandidates();
+        setCandidates(data);
+      } catch (error) {
+        console.error("Помилка під час завантаження кандидатів:", error);
+      }
+    };
+
+    fetchCandidates();
+  }, []);
 
   const handleVote = async () => {
     if (!selectedCandidate || !uniqueCode) {

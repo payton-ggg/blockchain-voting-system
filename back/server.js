@@ -54,7 +54,7 @@ app.post("/candidates", async (req, res) => {
   try {
     await votingContract.methods
       .addCandidate(name, description)
-      .send({ from: accounts[0], gas: 300000 });
+      .send({ from: accounts[0], gas: 900000 });
     res.status(200).json({ message: "Кандидат доданий" });
   } catch (err) {
     console.error("Помилка під час додавання кандидата:", err);
