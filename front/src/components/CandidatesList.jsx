@@ -52,7 +52,9 @@ const CandidatesList = () => {
           </tr>
         ))}
       </table>
-      <NavLink to="/">Повернутись</NavLink>
+      <NavLink to="/" className="mt-5">
+        Повернутись
+      </NavLink>
     </div>
   );
 };

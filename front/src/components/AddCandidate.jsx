@@ -48,9 +48,11 @@ const AddCandidate = () => {
           Додати
         </button>
       </form>
-      <NavLink to="/">Повернутись</NavLink>
       {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
       {successMessage && <p style={{ color: "green" }}>{successMessage}</p>}
+      <NavLink to="/" className="mt-5">
+        Повернутись
+      </NavLink>
     </>
   );
 };
