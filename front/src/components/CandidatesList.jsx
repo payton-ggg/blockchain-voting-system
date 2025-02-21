@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getCandidates } from "../services/api";
+import { NavLink } from "react-router";
 const CandidatesList = () => {
   const [candidates, setCandidates] = useState([]);
 
@@ -51,6 +52,7 @@ const CandidatesList = () => {
           </tr>
         ))}
       </table>
+      <NavLink to="/">Повернутись</NavLink>
     </div>
   );
 };

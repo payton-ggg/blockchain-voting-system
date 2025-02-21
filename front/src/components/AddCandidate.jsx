@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { addCandidate } from "../services/api";
+import { NavLink } from "react-router";
 
 const AddCandidate = () => {
   const [name, setName] = useState("");
@@ -47,6 +48,7 @@ const AddCandidate = () => {
           Додати
         </button>
       </form>
+      <NavLink to="/">Повернутись</NavLink>
       {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
       {successMessage && <p style={{ color: "green" }}>{successMessage}</p>}
     </>

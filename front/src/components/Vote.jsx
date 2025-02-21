@@ -90,6 +90,7 @@ const Vote = () => {
       </button>
       {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
       {successMessage && <p style={{ color: "green" }}>{successMessage}</p>}
+      <NavLink to="/">Повернутись</NavLink>
     </>
   );
 };
