@@ -20,7 +20,7 @@ const CandidatesList = () => {
   return (
     <div className="mt-7">
       <h2 className="pacifico-regular text-5xl">Список кандидатів</h2>
-      <table className="border-collapse border border-[#bea8aa] mt-8">
+      <table className="border-collapse border border-[#bea8aa] mt-8 mb-2">
         <thead className="border-collapse border border-[#bea8aa] bg-[#bbb59f]">
           <th className="border-collapse border border-[#bea8aa] p-1">
             Ім`я кандидата
@@ -52,9 +52,7 @@ const CandidatesList = () => {
           </tr>
         ))}
       </table>
-      <NavLink to="/" className="mt-5">
-        Повернутись
-      </NavLink>
+      <NavLink to="/">Повернутись</NavLink>
     </div>
   );
 };
