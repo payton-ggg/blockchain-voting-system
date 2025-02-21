@@ -22,13 +22,13 @@ const AddCandidate = () => {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <h2 className="mt-6">Додати кандидата</h2>
+        <h2 className="pacifico-regular text-5xl">Додати кандидата</h2>
         <input
           type="text"
-          placeholder="Маринич Платон"
+          placeholder="Ім'я кандидата"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="bg-[#7C7F65] border border-green-700 placeholder-gray-800 text-black text-sm rounded-lg block w-full p-2.5 mt-5"
+          className="bg-[#7C7F65] border border-green-700 placeholder-gray-800 text-black text-sm rounded-lg block w-full p-2.5 mt-6"
           required
         />
 

@@ -44,8 +44,8 @@ const Vote = () => {
 
   return (
     <>
-      <h2 className="mt-7">Голосування</h2>
-      <div className="flex gap-10 mt-3">
+      <h2 className="pacifico-regular text-5xl  ">Голосування</h2>
+      <div className="flex gap-10 mt-6">
         <input
           type="text"
           placeholder="Ідентифікаційний код"
@@ -71,7 +71,10 @@ const Vote = () => {
             {candidate.name}
           </th>
           <th className="border-collapse border border-[#bea8aa] p-1">
-            <NavLink to="/list-of-candidates">Докладніше</NavLink>
+            <NavLink to="/list-of-candidates">
+              {candidate.description.slice(0, candidate.description.length / 2)}
+              ...
+            </NavLink>
           </th>
           <th className="border-collapse border border-[#bea8aa] p-1">
             <button onClick={() => handleVote(candidate.id)}>Обрати</button>

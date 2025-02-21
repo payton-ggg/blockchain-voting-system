@@ -18,7 +18,7 @@ const CandidatesList = () => {
 
   return (
     <div className="mt-7">
-      <h2 className="pacifico-regular text-4xl">Список кандидатів</h2>
+      <h2 className="pacifico-regular text-5xl">Список кандидатів</h2>
       <table className="border-collapse border border-[#bea8aa] mt-8">
         <thead className="border-collapse border border-[#bea8aa] bg-[#bbb59f]">
           <th className="border-collapse border border-[#bea8aa] p-1">
@@ -35,17 +35,17 @@ const CandidatesList = () => {
           </th>
         </thead>
         {candidates.map((candidate, index) => (
-          <tr className="text-base mt-3" key={index}>
-            <th className="border-collapse border border-[#bea8aa] p-1">
+          <tr className="text-base font-normal mt-3" key={index}>
+            <th className="border-collapse border font-medium border-[#bea8aa] p-1">
               {candidate.name}
             </th>
-            <th className="border-collapse border border-[#bea8aa] p-1">
+            <th className="border-collapse border font-medium border-[#bea8aa] p-1">
               {candidate.description}
             </th>
-            <th className="border-collapse border border-[#bea8aa] p-1">
+            <th className="border-collapse border  border-[#bea8aa] p-1">
               {candidate.id}
             </th>
-            <th className="border-collapse border border-[#bea8aa] p-1">
+            <th className="border-collapse border  border-[#bea8aa] p-1">
               {candidate.voteCount}
             </th>
           </tr>
