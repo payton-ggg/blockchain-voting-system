@@ -1,6 +1,8 @@
 const Voting = artifacts.require("Voting");
 
 module.exports = function (deployer) {
+  const adminCode = "ADMIN-SECRET-2025";
+
   const validCodes = [
     "CODE-1234",
     "CODE-5678",
@@ -9,5 +11,5 @@ module.exports = function (deployer) {
     "CODE-TEST2",
   ];
 
-  deployer.deploy(Voting, validCodes);
+  deployer.deploy(Voting, validCodes, adminCode);
 };

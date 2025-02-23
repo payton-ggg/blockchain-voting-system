@@ -9,14 +9,17 @@ contract Voting {
     }
 
     Candidate[] public candidates;
-
-    // Массив валидных кодов
     string[] private validCodes;
-
-    // Хранение использованных кодов
     mapping(string => bool) public usedCodes;
+    string private adminCode;
 
-    constructor(string[] memory _validCodes) {
+    modifier onlyAdmin(string memory code) {
+        require(keccak256(abi.encodePacked(code)) == keccak256(abi.encodePacked(adminCode)), "Неверный код администратора");
+        _;
+    }
+
+    constructor(string memory _adminCode, string[] memory _validCodes) {
+        adminCode = _adminCode;
         validCodes = _validCodes;
     }
 
@@ -53,4 +56,10 @@ contract Voting {
     function getValidCodes() public view returns (string[] memory) {
         return validCodes;
     }
+
+    function checkAdminCode(string memory code) public view returns (bool) {
+        return keccak256(abi.encodePacked(code)) == keccak256(abi.encodePacked(adminCode));
+    }
+
+    
 }
