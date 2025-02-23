@@ -5,6 +5,7 @@ import App from "./App.jsx";
 import AddCandidate from "./components/AddCandidate";
 import CandidatesList from "./components/CandidatesList";
 import Vote from "./components/Vote";
+import Instruction from "./components/Instruction";
 import { BrowserRouter, Routes, Route } from "react-router";
 const root = document.getElementById("root");
 
@@ -16,7 +17,7 @@ ReactDOM.createRoot(root).render(
         <Route path="add-candidates" element={<AddCandidate />} />
         <Route path="list-of-candidates" element={<CandidatesList />} />
         <Route path="voting" element={<Vote />} />
-        {/* <Route path="how-to-use" element={<Instruction />} /> */}
+        <Route path="how-to-use" element={<Instruction />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>
