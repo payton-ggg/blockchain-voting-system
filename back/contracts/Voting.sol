@@ -14,7 +14,7 @@ contract Voting {
     string private adminCode;
 
     modifier onlyAdmin(string memory code) {
-        require(keccak256(abi.encodePacked(code)) == keccak256(abi.encodePacked(adminCode)), "Неверный код администратора");
+        require(keccak256(abi.encodePacked(code)) == keccak256(abi.encodePacked(adminCode)), "Invalid code");
         _;
     }
 
