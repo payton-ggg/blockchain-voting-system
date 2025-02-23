@@ -23,7 +23,6 @@ let accounts = [];
   }
 })();
 
-// Отримати кандидатів
 app.get("/candidates", async (req, res) => {
   try {
     const candidates = await votingContract.methods.getCandidates().call();
@@ -40,29 +39,34 @@ app.get("/candidates", async (req, res) => {
   }
 });
 
-// Додати кандидата
 app.post("/candidates", async (req, res) => {
-  const { name, description } = req.body;
-  if (!name) {
-    return res.status(400).json({ error: "Ім'я та опис обов'язкові" });
-  }
+  const { name, description, adminCode } = req.body;
 
-  if (!description) {
-    return res.status(400).json({ error: "Ім'я та опис обов'язкові" });
+  if (!name || !description || !adminCode) {
+    return res
+      .status(400)
+      .json({ error: "Имя, описание и код администратора обязательны" });
   }
 
   try {
+    const isAdmin = await votingContract.methods
+      .checkAdminCode(adminCode)
+      .call();
+    if (!isAdmin) {
+      return res.status(403).json({ error: "Неверный код администратора" });
+    }
+
     await votingContract.methods
-      .addCandidate(name, description)
+      .addCandidate(name, description, adminCode)
       .send({ from: accounts[0], gas: 900000 });
-    res.status(200).json({ message: "Кандидат доданий" });
+
+    res.status(200).json({ message: "Кандидат добавлен" });
   } catch (err) {
-    console.error("Помилка під час додавання кандидата:", err);
-    res.status(500).json({ error: "Помилка сервера" });
+    console.error("Ошибка при добавлении кандидата:", err);
+    res.status(500).json({ error: "Ошибка сервера" });
   }
 });
 
-// Голосування з кодом
 app.post("/vote", async (req, res) => {
   const { candidateId, code } = req.body;
 
@@ -92,7 +96,6 @@ app.post("/vote", async (req, res) => {
   }
 });
 
-// Отримати всі валідні коди (тільки для тесту)
 app.get("/valid-codes", async (req, res) => {
   try {
     const validCodes = await votingContract.methods.getValidCodes().call();
@@ -111,6 +114,17 @@ app.get("/check-code/:code", async (req, res) => {
   } catch (err) {
     console.error("Помилка під час перевірки коду:", err);
     res.status(500).json({ error: "Помилка сервера" });
+  }
+});
+
+app.get("/check-admin/:code", async (req, res) => {
+  const { code } = req.params;
+  try {
+    const isAdmin = await votingContract.methods.checkAdminCode(code).call();
+    res.json({ isAdmin });
+  } catch (err) {
+    console.error("Ошибка при проверке кода администратора:", err);
+    res.status(500).json({ error: "Ошибка сервера" });
   }
 });
 
