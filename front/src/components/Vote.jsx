@@ -28,6 +28,7 @@ const Vote = () => {
     }
 
     const isUsed = await checkCode(uniqueCode);
+    console.log(isUsed);
     if (isUsed) {
       setErrorMessage("Цей код вже використано!");
       return;

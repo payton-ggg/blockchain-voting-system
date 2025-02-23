@@ -11,5 +11,5 @@ module.exports = function (deployer) {
     "CODE-TEST2",
   ];
 
-  deployer.deploy(Voting, validCodes, adminCode);
+  deployer.deploy(Voting, adminCode, validCodes);
 };

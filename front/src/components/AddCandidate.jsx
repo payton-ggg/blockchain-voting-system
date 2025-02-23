@@ -13,10 +13,9 @@ const AddCandidate = () => {
     e.preventDefault();
     try {
       const checkAdmin = checkAdminCode(adminCode);
-
       console.log(checkAdmin);
 
-      await addCandidate(name, description);
+      await addCandidate(name, description, adminCode);
       setSuccessMessage("Кандидат успішно доданий!");
       setName("");
       setDescription("");
