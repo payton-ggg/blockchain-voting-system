@@ -55,33 +55,42 @@ const Vote = () => {
           className="bg-[#7C7F65] border border-green-700 placeholder-gray-800 text-black text-sm rounded-lg block w-full p-2.5 mb-3"
         />
       </div>
-      <tr>
-        <th className="border-collapse border border-[#bea8aa] p-1">
-          Ім&apos;я
-        </th>
-        <th className="border-collapse border border-[#bea8aa] p-1">
-          Інформація про кандидата
-        </th>
-        <th className="border-collapse border border-[#bea8aa] p-1">
-          Підтвердити вибір
-        </th>
-      </tr>
-      {candidates.map((candidate) => (
-        <tr className="text-base mt-3" key={candidate.id}>
-          <th className="border-collapse border border-[#bea8aa] p-1">
-            {candidate.name}
-          </th>
-          <th className="border-collapse border border-[#bea8aa] p-1">
-            <NavLink to="/list-of-candidates">
-              {candidate.description.slice(0, candidate.description.length / 2)}
-              ...
-            </NavLink>
-          </th>
-          <th className="border-collapse border border-[#bea8aa] p-1">
-            <button onClick={() => handleVote(candidate.id)}>Обрати</button>
-          </th>
-        </tr>
-      ))}
+      <table>
+        <thead>
+          <tr>
+            <th className="border-collapse border border-[#bea8aa] p-1">
+              Ім&apos;я
+            </th>
+            <th className="border-collapse border border-[#bea8aa] p-1">
+              Інформація про кандидата
+            </th>
+            <th className="border-collapse border border-[#bea8aa] p-1">
+              Підтвердити вибір
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {candidates.map((candidate) => (
+            <tr className="text-base mt-3" key={candidate.id}>
+              <th className="border-collapse border border-[#bea8aa] p-1">
+                {candidate.name}
+              </th>
+              <th className="border-collapse border border-[#bea8aa] p-1">
+                <NavLink to="/list-of-candidates">
+                  {candidate.description.slice(
+                    0,
+                    candidate.description.length / 2
+                  )}
+                  ...
+                </NavLink>
+              </th>
+              <th className="border-collapse border border-[#bea8aa] p-1">
+                <button onClick={() => handleVote(candidate.id)}>Обрати</button>
+              </th>
+            </tr>
+          ))}
+        </tbody>
+      </table>
 
       <button
         onClick={handleVote}
