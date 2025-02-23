@@ -42,7 +42,7 @@ const AddCandidate = () => {
           placeholder="Ім'я кандидата"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="bg-[#7C7F65] border border-green-700 placeholder-gray-800 text-black text-sm rounded-lg block w-full p-2.5 mt-6"
+          className="bg-[#7C7F65] border border-green-700 placeholder-gray-800 text-black text-sm rounded-lg block w-full p-2.5 mt-3"
           required
         />
 
