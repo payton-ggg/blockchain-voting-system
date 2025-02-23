@@ -7,8 +7,8 @@ export const getCandidates = async () => {
   return response.data;
 };
 
-export const addCandidate = async (name, description) => {
-  await axios.post(`${BASE_URL}/candidates`, { name, description });
+export const addCandidate = async (name, description, adminCode) => {
+  await axios.post(`${BASE_URL}/candidates`, { name, description, adminCode });
 };
 
 export const vote = async (candidateId, code) => {
@@ -23,4 +23,9 @@ export const checkCode = async (code) => {
 export const getValidCodes = async () => {
   const response = await axios.get(`${BASE_URL}/valid-codes`);
   return response.data;
+};
+
+export const checkAdminCode = async (code) => {
+  const response = await axios.get(`${BASE_URL}/check-admin/${code}`);
+  return response.data.isAdmin;
 };

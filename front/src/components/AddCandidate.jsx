@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { addCandidate } from "../services/api";
+import { addCandidate, checkAdminCode } from "../services/api";
 import { NavLink } from "react-router";
 
 const AddCandidate = () => {
   const [name, setName] = useState("");
+  const [adminCode, setAdminCode] = useState("");
   const [description, setDescription] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
@@ -11,6 +12,10 @@ const AddCandidate = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      const checkAdmin = checkAdminCode(adminCode);
+
+      console.log(checkAdmin);
+
       await addCandidate(name, description);
       setSuccessMessage("Кандидат успішно доданий!");
       setName("");
@@ -24,6 +29,15 @@ const AddCandidate = () => {
     <>
       <form onSubmit={handleSubmit}>
         <h2 className="pacifico-regular text-5xl">Додати кандидата</h2>
+        <input
+          type="text"
+          placeholder="Код адміністратора"
+          value={adminCode}
+          onChange={(e) => setAdminCode(e.target.value)}
+          className="bg-[#7C7F65] border border-green-700 placeholder-gray-800 text-black text-sm rounded-lg block w-full p-2.5 mt-6"
+          required
+        />
+
         <input
           type="text"
           placeholder="Ім'я кандидата"
