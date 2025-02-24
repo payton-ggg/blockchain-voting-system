@@ -17,6 +17,7 @@ const AddCandidate = () => {
 
       await addCandidate(name, description, adminCode);
       setSuccessMessage("Кандидат успішно доданий!");
+      setAdminCode("");
       setName("");
       setDescription("");
     } catch (error) {

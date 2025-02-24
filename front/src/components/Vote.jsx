@@ -14,7 +14,7 @@ const Vote = () => {
         const data = await getCandidates();
         setCandidates(data);
       } catch (error) {
-        console.error("Помилка під час завантаження кандидатів:", error);
+        setErrorMessage("Помилка під час завантаження кандидатів:", error);
       }
     };
 
@@ -36,6 +36,7 @@ const Vote = () => {
 
     try {
       await vote(id, uniqueCode);
+      setUniqueCode("");
       setErrorMessage("");
       setSuccessMessage("Голос успішно зараховано!");
     } catch (error) {

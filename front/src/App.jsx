@@ -1,6 +1,7 @@
 import { NavLink } from "react-router";
 import "./App.css";
 import { createContext, useState } from "react";
+import { getValidCodes } from "./services/api";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const errorContext = createContext("");
@@ -8,6 +9,8 @@ export const errorContext = createContext("");
 function App() {
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+
+  console.log(getValidCodes());
 
   return (
     <div className="App">
