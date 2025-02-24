@@ -2,8 +2,6 @@
 
 This guide explains how to set up and run the project, including **Ganache UI, backend, and frontend**.  
 
----
-
 ## 🚀 **Prerequisites**  
 Before running the project, make sure you have the following installed:  
 
