@@ -1,3 +1,4 @@
+<<<<<<< HEAD:README.md
 # 📝 **Project Setup and Run Guide**
 
 This guide explains how to set up and run the project, including **Ganache UI, backend, and frontend**.
@@ -111,3 +112,6 @@ truffle migrate --reset
 ## 📌 **Conclusion**
 
 This setup ensures a **smooth and automated process** for launching the project. If you run into any issues, feel free to ask for help! 🚀
+=======
+# Project Setup and Run Guide
+>>>>>>> 6136b743e7a79f4b280dc69ffe8ff8ff47fb96d6:README.sh
