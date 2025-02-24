@@ -1,4 +1,7 @@
-const { default: getRandom } = require("../getRandom");
+function getRandom(min, max) {
+  let rand = min + Math.random() * (max + 1 - min);
+  return Math.floor(rand);
+}
 
 const Voting = artifacts.require("Voting");
 
