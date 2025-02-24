@@ -19,6 +19,7 @@ const AddCandidate = () => {
       setSuccessMessage("Кандидат успішно доданий!");
       setName("");
       setDescription("");
+      setAdminCode("");
     } catch (error) {
       setErrorMessage("Помилка під час додавання кандидата:", error);
     }
