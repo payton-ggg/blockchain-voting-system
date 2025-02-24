@@ -20,7 +20,7 @@ Before running the project, make sure you have the following installed:
 
 ```sh
 git clone https://github.com/payton-ggg/blockchain-voting-system.git
-cd project
+cd blockchain-voting-system
 ```
 
 2️⃣ **Install dependencies for backend and frontend:**
@@ -41,7 +41,6 @@ A script (`start.bat`) is provided for **Windows users** to start everything aut
 ### **1️⃣ Run `start.bat`**
 
 Double-click the `start.bat` file, and it will:  
-✅ Open **Ganache UI**  
 ✅ Start **backend**  
 ✅ Start **frontend**
 
@@ -61,6 +60,8 @@ If you need to redeploy the contract, run:
 cd backend
 truffle migrate --reset
 ```
+
+Copy `contract_adress` and paste it in .env file.
 
 ### **3️⃣ Start Backend**
 
