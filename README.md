@@ -1,4 +1,3 @@
-<<<<<<< HEAD:README.md
 # 📝 **Project Setup and Run Guide**
 
 This guide explains how to set up and run the project, including **Ganache UI, backend, and frontend**.
@@ -20,16 +19,16 @@ Before running the project, make sure you have the following installed:
 1️⃣ **Clone the repository:**
 
 ```sh
-git clone https://github.com/your-repo/project.git
+git clone https://github.com/payton-ggg/blockchain-voting-system.git
 cd project
 ```
 
 2️⃣ **Install dependencies for backend and frontend:**
 
 ```sh
-cd backend
+cd back
 npm install
-cd ../frontend
+cd ../front
 npm install
 ```
 
@@ -37,7 +36,7 @@ npm install
 
 ## 🏃 **Run the Project Automatically (Recommended)**
 
-A script (`start.bat`) is provided for **Windows users** to start everything automatically.
+A script (`start.bat`) is provided for **Windows users** to start everything automatically. But you need to run Ganache UI as well
 
 ### **1️⃣ Run `start.bat`**
 
@@ -81,37 +80,6 @@ npm start
 
 ## 🎯 **Usage**
 
-- Open the **frontend** in your browser at `http://localhost:3000`.
+- Open the **frontend** in your browser at `http://localhost:5173`.
 - The backend runs at `http://localhost:3000/api`.
 - Ganache UI must be running for blockchain interactions to work.
-
----
-
-## ❓ **Troubleshooting**
-
-🔹 **Port Already in Use?**  
-If you see an error like `EADDRINUSE: address already in use`, stop any running instances and try again:
-
-```sh
-taskkill /F /IM node.exe
-```
-
-🔹 **Ganache UI Doesn't Start?**  
-Make sure you have installed **Ganache** and set the correct path in `start.bat`.
-
-🔹 **Contract Not Found?**  
-If the frontend/backend can't find the contract, redeploy it:
-
-```sh
-cd backend
-truffle migrate --reset
-```
-
----
-
-## 📌 **Conclusion**
-
-This setup ensures a **smooth and automated process** for launching the project. If you run into any issues, feel free to ask for help! 🚀
-=======
-# Project Setup and Run Guide
->>>>>>> 6136b743e7a79f4b280dc69ffe8ff8ff47fb96d6:README.sh
