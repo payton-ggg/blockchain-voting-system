@@ -1,13 +1,15 @@
-# 📝 **Blockchain voting system**  
+# 📝 **Project Setup and Run Guide**  
 
 This guide explains how to set up and run the project, including **Ganache UI, backend, and frontend**.  
+
+---
 
 ## 🚀 **Prerequisites**  
 Before running the project, make sure you have the following installed:  
 
-- **[Node.js](https://nodejs.org/)** ( latest LTS version recommended)  
-- **[Ganache](https://trufflesuite.com/ganache/)** ( for running a local blockchain)  
-- **[Truffle](https://trufflesuite.com/truffle/)** ( for using migrations)  
+- **[Node.js](https://nodejs.org/)** (latest LTS version recommended)  
+- **[Ganache](https://trufflesuite.com/ganache/)** (for running a local blockchain)  
+- **[Truffle](https://trufflesuite.com/truffle/)** (optional, if using migrations)  
 
 ---
 
@@ -15,15 +17,15 @@ Before running the project, make sure you have the following installed:
 
 1️⃣ **Clone the repository:**  
 ```sh
-git clone https://github.com/payton-ggg/blockchain-voting-system.git
-cd blockchain-voting-system.git
+git clone https://github.com/your-repo/project.git
+cd project
 ```
 
 2️⃣ **Install dependencies for backend and frontend:**  
 ```sh
-cd back
+cd backend
 npm install
-cd ../front
+cd ../frontend
 npm install
 ```
 
@@ -35,6 +37,7 @@ A script (`start.bat`) is provided for **Windows users** to start everything aut
 
 ### **1️⃣ Run `start.bat`**  
 Double-click the `start.bat` file, and it will:  
+✅ Open **Ganache UI**  
 ✅ Start **backend**  
 ✅ Start **frontend**  
 
@@ -91,3 +94,8 @@ If the frontend/backend can't find the contract, redeploy it:
 cd backend
 truffle migrate --reset
 ```
+
+---
+
+## 📌 **Conclusion**  
+This setup ensures a **smooth and automated process** for launching the project. If you run into any issues, feel free to ask for help! 🚀
