@@ -13,6 +13,8 @@ function App() {
   
   console.log(codes)
 
+  console.log(getValidCodes());
+
   return (
     <div className="App">
       <header>
