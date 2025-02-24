@@ -7,9 +7,9 @@ This guide explains how to set up and run the project, including **Ganache UI, b
 ## 🚀 **Prerequisites**  
 Before running the project, make sure you have the following installed:  
 
-- **[Node.js](https://nodejs.org/)** (latest LTS version recommended)  
-- **[Ganache](https://trufflesuite.com/ganache/)** (for running a local blockchain)  
-- **[Truffle](https://trufflesuite.com/truffle/)** (for using migrations)  
+- **[Node.js](https://nodejs.org/)** ( latest LTS version recommended)  
+- **[Ganache](https://trufflesuite.com/ganache/)** ( for running a local blockchain)  
+- **[Truffle](https://trufflesuite.com/truffle/)** ( for using migrations)  
 
 ---
 
