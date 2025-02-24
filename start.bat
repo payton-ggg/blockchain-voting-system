@@ -1,8 +1,8 @@
 @echo off
 echo Запуск backend...
-start "" cmd /k "cd /d back && npm start"
+start "" cmd /k "cd /d back && truffle migrate && npm start"
 
-timeout /t 2 /nobreak >nul
+timeout /t 10 /nobreak >nul
 
 echo Запуск frontend...
 start "" cmd /k "cd /d front && npm run dev"
