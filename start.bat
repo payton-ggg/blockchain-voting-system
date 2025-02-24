@@ -7,4 +7,4 @@ timeout /t 10 /nobreak >nul
 echo Запуск frontend...
 start "" cmd /k "cd /d front && npm run dev"
 
-echo Все процессы запущены!
+echo Усі процеси було запущено!
