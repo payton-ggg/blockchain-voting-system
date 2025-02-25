@@ -93,12 +93,6 @@ const Vote = () => {
         </tbody>
       </table>
 
-      <button
-        onClick={handleVote}
-        className="hover:bg-[#BEA8AA] focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center mt-3"
-      >
-        Голосувати
-      </button>
       {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
       {successMessage && <p style={{ color: "green" }}>{successMessage}</p>}
       <NavLink className="ml-5" to="/">
