@@ -17,7 +17,6 @@ const AddCandidate = () => {
 
       await addCandidate(name, description, adminCode);
       setSuccessMessage("Кандидат успішно доданий!");
-      setAdminCode("");
       setName("");
       setDescription("");
       setAdminCode("");
@@ -35,7 +34,7 @@ const AddCandidate = () => {
           placeholder="Код адміністратора"
           value={adminCode}
           onChange={(e) => setAdminCode(e.target.value)}
-          className="bg-[#7C7F65] border border-green-700 placeholder-gray-800 text-black text-sm rounded-lg block w-full p-2.5 mt-6"
+          className="bg-[#7C7F65] border border-green-700 placeholder-gray-800 text-black text-sm rounded-lg block w-full p-2.5 mt-4"
           required
         />
 

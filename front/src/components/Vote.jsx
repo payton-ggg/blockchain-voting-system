@@ -46,8 +46,8 @@ const Vote = () => {
 
   return (
     <>
-      <h2 className="pacifico-regular text-5xl  ">Голосування</h2>
-      <div className="flex gap-10 mt-6">
+      <h2 className="pacifico-regular text-5xl">Голосування</h2>
+      <div className="flex gap-10 mt-4">
         <input
           type="text"
           placeholder="Ідентифікаційний код"
