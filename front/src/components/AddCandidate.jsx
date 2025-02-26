@@ -4,7 +4,7 @@ import { NavLink } from "react-router";
 
 const AddCandidate = () => {
   const [name, setName] = useState("");
-  const [adminCode, setAdminCode] = useState("");
+  const [adminCode, setAdminCode] = useState("ADMIN-SECRET-2025");
   const [description, setDescription] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
