@@ -1,6 +1,7 @@
 const express = require("express");
 const Web3 = require("web3").default;
 const cors = require("cors");
+const rateLimit = require("express-rate-limit");
 require("dotenv").config();
 
 const app = express();
@@ -22,6 +23,13 @@ let accounts = [];
     process.exit(1);
   }
 })();
+
+
+const voteLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 минут
+  max: 1,
+  message: "Слишком много запросов, попробуйте позже",
+});
 
 app.get("/candidates", async (req, res) => {
   try {
@@ -67,7 +75,7 @@ app.post("/candidates", async (req, res) => {
   }
 });
 
-app.post("/vote", async (req, res) => {
+app.post("/vote", voteLimiter, async (req, res) => {
   const { candidateId, code } = req.body;
 
   if (candidateId === undefined || !code) {
