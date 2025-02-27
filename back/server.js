@@ -27,7 +27,7 @@ let accounts = [];
 
 const voteLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 минут
-  max: 1,
+  max: 3,
   message: "Слишком много запросов, попробуйте позже",
 });
 
