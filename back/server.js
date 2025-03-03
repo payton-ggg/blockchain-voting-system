@@ -1,17 +1,31 @@
-const express = require("express");
-const Web3 = require("web3").default;
-const cors = require("cors");
-const rateLimit = require("express-rate-limit");
+import express, { json } from "express";
+import Web3 from "web3";
+import cors from "cors";
+import rateLimit from "express-rate-limit";
+import { create } from "ipfs-http-client";
 require("dotenv").config();
+
+const ipfs = create({ host: "ipfs.infura.io", port: 5001, protocol: "https" });
+
+async function uploadToIPFS(data) {
+  try {
+    const { path } = await ipfs.add(data);
+    return path; // Возвращаем CID
+  } catch (error) {
+    console.error("Ошибка загрузки в IPFS:", error);
+    throw new Error("Ошибка при загрузке в IPFS");
+  }
+}
+
 
 const app = express();
 const PORT = 3000;
 
 app.use(cors());
-app.use(express.json());
+app.use(json());
 
 const web3 = new Web3("http://127.0.0.1:7545");
-const contractABI = require("./build/contracts/Voting.json").abi;
+import { abi as contractABI } from "./build/contracts/Voting.json";
 const contractAddress = process.env.CONTRACT_ADRESS;
 const votingContract = new web3.eth.Contract(contractABI, contractAddress);
 
@@ -23,7 +37,6 @@ let accounts = [];
     process.exit(1);
   }
 })();
-
 
 const voteLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 минут
@@ -37,38 +50,38 @@ app.get("/candidates", async (req, res) => {
     const formattedCandidates = candidates.map((candidate, index) => ({
       id: index,
       name: candidate.name,
-      description: candidate.description,
+      ipfsHash: candidate.ipfsHash,
       voteCount: parseInt(candidate.voteCount, 10),
     }));
     res.json(formattedCandidates);
   } catch (err) {
-    console.error("Помилка під час отримання кандидатів:", err);
-    res.status(500).json({ error: "Помилка сервера" });
+    console.error("Ошибка получения кандидатов:", err);
+    res.status(500).json({ error: "Ошибка сервера" });
   }
 });
+
 
 app.post("/candidates", async (req, res) => {
   const { name, description, adminCode } = req.body;
 
   if (!name || !description || !adminCode) {
-    return res
-      .status(400)
-      .json({ error: "Имя, описание и код администратора обязательны" });
+    return res.status(400).json({ error: "Имя, описание и код администратора обязательны" });
   }
 
   try {
-    const isAdmin = await votingContract.methods
-      .checkAdminCode(adminCode)
-      .call();
+    const isAdmin = await votingContract.methods.checkAdminCode(adminCode).call();
     if (!isAdmin) {
       return res.status(403).json({ error: "Неверный код администратора" });
     }
 
+    // Загружаем описание в IPFS и получаем CID
+    const ipfsHash = await uploadToIPFS(description);
+
     await votingContract.methods
-      .addCandidate(name, description, adminCode)
+      .addCandidate(name, ipfsHash)
       .send({ from: accounts[0], gas: 900000 });
 
-    res.status(200).json({ message: "Кандидат добавлен" });
+    res.status(200).json({ message: "Кандидат добавлен", ipfsHash });
   } catch (err) {
     console.error("Ошибка при добавлении кандидата:", err);
     res.status(500).json({ error: "Ошибка сервера" });

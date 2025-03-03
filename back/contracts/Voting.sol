@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 contract Voting {
     struct Candidate {
         string name;
-        string description;
+        string ipfsHash;
         uint256 voteCount;
     }
 
@@ -23,8 +23,8 @@ contract Voting {
         validCodes = _validCodes;
     }
 
-    function addCandidate(string memory name, string memory description) public {
-        candidates.push(Candidate(name, description, 0));
+    function addCandidate(string memory name, string memory ipfsHash) public {
+        candidates.push(Candidate(name, ipfsHash, 0));
     }
 
     function vote(uint256 candidateId, string memory code) public {
