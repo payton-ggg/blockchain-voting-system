@@ -3,7 +3,10 @@ import Web3 from "web3";
 import cors from "cors";
 import rateLimit from "express-rate-limit";
 import { create } from "ipfs-http-client";
-require("dotenv").config();
+import "dotenv/config";
+import contractData from "./build/contracts/Voting.json" assert { type: "json" };
+
+const contractABI = contractData.abi;
 
 const ipfs = create({ host: "ipfs.infura.io", port: 5001, protocol: "https" });
 
@@ -25,7 +28,6 @@ app.use(cors());
 app.use(json());
 
 const web3 = new Web3("http://127.0.0.1:7545");
-import { abi as contractABI } from "./build/contracts/Voting.json";
 const contractAddress = process.env.CONTRACT_ADRESS;
 const votingContract = new web3.eth.Contract(contractABI, contractAddress);
 
