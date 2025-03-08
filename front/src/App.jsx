@@ -9,9 +9,6 @@ export const errorContext = createContext("");
 function App() {
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
-  const codes = getValidCodes()
-  
-  console.log(codes)
 
   console.log(getValidCodes());
 
