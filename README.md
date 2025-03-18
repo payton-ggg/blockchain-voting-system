@@ -38,7 +38,12 @@ npm install
 
 A script (`start.bat`) is provided for **Windows users** to start everything automatically. But you need to run Ganache UI as well
 
-### **1️⃣ Run `start.bat`**
+### **1️⃣ Run `install.bat`**
+
+Double-click the `install.bat` file, and it will:  
+✅ Install **dependencies**
+
+### **2️⃣ Run `start.bat`**
 
 Double-click the `start.bat` file, and it will:  
 ✅ Start **backend**  
