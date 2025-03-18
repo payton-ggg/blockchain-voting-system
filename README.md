@@ -23,13 +23,10 @@ git clone https://github.com/payton-ggg/blockchain-voting-system.git
 cd blockchain-voting-system
 ```
 
-2️⃣ **Install dependencies for backend and frontend:**
+2️⃣ **Install dependencies for backend and frontend, by using `install.bat`:**
 
 ```sh
-cd back
-npm install
-cd ../front
-npm install
+./install.bat
 ```
 
 ---
@@ -38,12 +35,7 @@ npm install
 
 A script (`start.bat`) is provided for **Windows users** to start everything automatically. But you need to run Ganache UI as well
 
-### **1️⃣ Run `install.bat`**
-
-Double-click the `install.bat` file, and it will:  
-✅ Install **dependencies**
-
-### **2️⃣ Run `start.bat`**
+### **1️⃣ Run `start.bat`**
 
 Double-click the `start.bat` file, and it will:  
 ✅ Start **backend**  
