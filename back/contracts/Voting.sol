@@ -60,6 +60,4 @@ contract Voting {
     function checkAdminCode(string memory code) public view returns (bool) {
         return keccak256(abi.encodePacked(code)) == keccak256(abi.encodePacked(adminCode));
     }
-
-    
 }
